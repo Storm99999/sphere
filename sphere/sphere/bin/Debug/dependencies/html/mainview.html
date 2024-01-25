@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphere</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            background: #111;
+            color: #fff;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow for text */
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Subtle white glow for login box */
+            backdrop-filter: blur(10px);
+            width: 550px;
+            height: 400px;
+            
+        }
+
+        .login2-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow for text */
+        }
+
+        .login2-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Subtle white glow for login box */
+            backdrop-filter: blur(10px);
+            width: 550px;
+            height: 400px;
+            max-height: 300px; /* Set a maximum height to make it scrollable */
+            overflow-y: scroll; /* Use 'scroll' instead of 'auto' if you always want a scrollbar */
+        }
+
+        /* Webkit scrollbar customization */
+        .login2-box::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .login2-box::-webkit-scrollbar-track {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .login2-box::-webkit-scrollbar-thumb {
+            background-color: #888; /* color of the thumb */
+        }
+
+        .login2-box::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* color of the thumb on hover */
+        }
+
+        .keybind {
+            top: 50%;
+            left: 5%;
+            margin-bottom: 3px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow for text */
+        }
+
+        .key-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Subtle white glow for login box */
+            backdrop-filter: blur(10px);
+            width: 1px;
+            height: 10px;
+
+        }
+
+        .sidebar {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-500%);
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Whi te glow for text */
+            align-items: flex-start; /* Prevent stretching */
+        }
+
+        .sidebar-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Subtle white glow for login box */
+            backdrop-filter: blur(10px);
+            height: 110px;
+            flex-direction: column;
+            display: flex;
+            align-items: flex-start; /* Prevent stretching */
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            outline: none;
+        }
+
+        .login-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); /* Subtle white glow for login box */
+            color: #fff;
+            padding: 15px 60px; /* Wider and longer button */
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            outline: none;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow for text */
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Added margin to separate checkboxes */
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .custom-checkbox {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .custom-checkbox input {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .checkmark {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background-color: #fff;
+            display: none;
+        }
+
+        .custom-checkbox input:checked + .checkmark {
+            display: block;
+        }
+
+        .checkbox-label-text {
+            font-size: 16px;
+            color: #fff;
+            margin-left: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            white-space: nowrap; /* Added to prevent text wrapping */
+            overflow: hidden; /* Added to hide overflowing text */
+            text-overflow: ellipsis; /* Added to show ellipsis for overflow */
+        }
+
+        .login-btn:hover {
+            background-color:rgba(255, 255, 255, 0.02); /* Subtle white glow for login box */
+
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .list-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .list-column {
+            flex: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            margin: 10px;
+        }
+
+        .list-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .list-items {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-item {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .slider-container {
+      width: 300px;
+      filter: drop-shadow(0 0 10px white); /* Adjust the color and size of the glow */
+
+      position: relative;
+    }
+    
+
+    input[type="range"] {
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #ddd;
+      outline: none;
+      position: relative;
+      z-index: 2;
+    }
+
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3498db;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: 5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #3498db;
+      z-index: 1;
+    }
+
+    .sidebar-box img {
+        margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+            margin-bottom: 10px;
+            transition: transform 0.3s ease-in-out;
+            height: 32px;
+            width: 32px;
+            filter: drop-shadow(0 0 10px white); /* Adjust the color and size of the glow */
+
+        }
+
+        .sidebar-box img:hover {
+            transform: scale(1.3); 
+        }
+
+
+
+        
+    </style>
+</head>
+<body>
+    
+    
+    <div id="particles-js"></div>
+    <div class="login-container" id="main">
+        <div class="login-box">
+            <h2>Macro Settings</h2>
+            
+            <div class="list-container">
+                <div class="list-column">
+                    <div class="list-title">Edit Macro</div>
+                    <ul class="list-items">
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" onchange="window.chrome.webview.postMessage(`editmacro:${this.checked}`)">
+                                    <div class="checkmark"></div>
+                                </div>
+                                <span class="checkbox-label-text">Enabled</span>
+                            </label>
+                        </div>
+                        
+                    </ul>
+                </div>
+        
+                <div class="list-column">
+                    <div class="list-title">Prefire</div>
+                    <ul class="list-items">
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" onchange="window.chrome.webview.postMessage(`prefiremacro:${this.checked}`)">
+                                    <div class="checkmark"></div>
+                                </div>
+                                <span class="checkbox-label-text">Enabled</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" onchange="window.chrome.webview.postMessage(`exitbuilding:${this.checked}`)">
+                                    <div class="checkmark"></div>
+                                </div>
+                                <span class="checkbox-label-text">Exit Building</span>
+                            </label>
+                        </div>
+                    </ul>
+                </div>
+        
+                <div class="list-column">
+                    <div class="list-title">Recoil Control</div>
+                    <ul class="list-items">
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <div class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" onchange="window.chrome.webview.postMessage(`rcs:${this.checked}`)">
+                                    <div class="checkmark"></div>
+                                </div>
+                                <span class="checkbox-label-text">Enabled</span>
+                            </label>
+                        </div>
+                        <li class="list-item">Check settings</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="login2-container" id="settings" style="visibility: hidden;">
+        <div class="login2-box">
+            <h2>Settings</h2>
+            <div class="slider-container">
+                <label for="Range" id="n1">Recoil Control Strenght: 4</label>
+                <input type="range" id="Range" min="1" max="10" value="4" onchange="document.getElementById('n1').textContent = 'Recoil Control Strenght: ' + this.value.toString(); window.chrome.webview.postMessage(`rcsStrenght:${this.value}`)">
+                <div class="fill" id="fill"></div>
+            </div>
+            
+            <div class="keybind" style="margin-bottom: 20px;">
+                Edit Bind
+                <div class="key-box">
+                    <input type="text" id="keyInput3" maxlength="5" onchange="window.chrome.webview.postMessage(`editbind:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+            
+            <div class="keybind" style="margin-bottom: 20px;">
+                Pickaxe Bind
+                <div class="key-box">
+                    <input type="text" id="keyInput2" maxlength="5" onchange="window.chrome.webview.postMessage(`pickbind:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+            
+            <div class="keybind" style="margin-bottom: 20px;">
+                Wall Bind
+                <div class="key-box">
+                    <input type="text" id="keyInput3" maxlength="5" onchange="window.chrome.webview.postMessage(`wallbind:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+            
+            <div class="keybind" style="margin-bottom: 20px;">
+                Edit Macro Start
+                <div class="key-box">
+                    <input type="text" id="keyInput3" maxlength="5" onchange="window.chrome.webview.postMessage(`editstart:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+            
+            <div class="keybind" style="margin-bottom: 20px;">
+                Prefire Macro Start
+                <div class="key-box">
+                    <input type="text" id="keyInput3" maxlength="5" onchange="window.chrome.webview.postMessage(`prefirestart:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+
+            <div class="keybind" style="margin-bottom: 20px;">
+                RCS Macro Start
+                <div class="key-box">
+                    <input type="text" id="keyInput3" maxlength="5" onchange="window.chrome.webview.postMessage(`rcsstart:${this.value.toUpperCase()}`)" style="background: transparent; border: none; outline: none; left: -7px; top: -7px; position: relative; color: white; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="login-container" id="last" style="visibility: hidden;">
+        <div class="login-box" style="display: flex; flex-direction: column;">
+            <h2>Config & Self Destruction</h2>
+            <button class="login-btn" style="margin: 7px;" onclick="window.chrome.webview.postMessage('selfdestruct');">Self Destruct</button>
+            <button class="login-btn" style="margin: 7px;" onclick="window.chrome.webview.postMessage('saveconfig');">Save Config</button>
+            <button class="login-btn" style="margin: 7px;" onclick="window.chrome.webview.postMessage('loadconfig');">Load Config</button>
+            
+           
+            
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <img src="mouse.png" data-value="1142207557918797885" onclick="document.getElementById('main').style.visibility = 'visible';document.getElementById('settings').style.visibility = 'hidden';document.getElementById('last').style.visibility = 'hidden';">
+            <img src="keyboard.png" data-value="1142207557918797885" onclick="document.getElementById('main').style.visibility = 'hidden';document.getElementById('settings').style.visibility = 'visible';document.getElementById('last').style.visibility = 'hidden';">
+            <img src="database.png" data-value="1142207557918797885" onclick="document.getElementById('main').style.visibility = 'hidden';document.getElementById('settings').style.visibility = 'hidden';document.getElementById('last').style.visibility = 'visible';">
+
+            
+        </div>
+    </div>
+
+    <script>
+        
+
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    },
+                    image: {
+                        src: 'img/github.svg',
+                        width: 100,
+                        height: 100
+                    }
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 5,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 4,
+                        size_min: 0.3,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: false
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>
