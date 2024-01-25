@@ -20,8 +20,7 @@
 
 # Sphere
 
-[![Downloads][downloads-badge]][releases]
-
+[![Github All Releases](https://img.shields.io/github/downloads/Storm999999/sphere/total.svg)]()
 Sphere, the next gen macro software for fortnite.
 
 Prefire, Recoil Control (RCS) & Edit Macros all in one executable<br />
