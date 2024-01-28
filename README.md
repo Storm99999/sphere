@@ -34,3 +34,6 @@ Sphere is written in C#, and should be compatible with all devices.
 * Extract
 * Profit!
 
+## Issues
+Got issues? https://discord.gg/nT9mrC2T is there to help! Join and ask around.
+
